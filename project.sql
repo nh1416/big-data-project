@@ -22,3 +22,4 @@ OVERWRITE INTO TABLE water_quality;
 
 SELECT * FROM water_quality LIMIT 10;
 
+SELECT air_quality.startdate, avg(air_quality.datavalue), avg(water_quality.residualfreechlorine), avg(water_quality.turbidity), avg(water_quality.fluoride) FROM air_quality INNER JOIN water_quality ON air_quality.startdate = water_quality.sampledate GROUP BY air_quality.startdate;
