@@ -23,4 +23,5 @@ DESCRIBE water_quality;
 
 SELECT * FROM water_quality LIMIT 10;
 
+--Query to show all of the relevant data in both sets together
 SELECT air_quality.startdate, avg(air_quality.datavalue), avg(water_quality.residualfreechlorine), avg(water_quality.turbidity), avg(water_quality.fluoride) FROM air_quality INNER JOIN water_quality ON air_quality.startdate = water_quality.sampledate GROUP BY air_quality.startdate;
