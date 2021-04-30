@@ -1,1 +1,7 @@
 # big-data-project
+
+The etl_code directory contains two subdirectories with the cleaning code of each team member
+
+The profiling_code directory contains two subdirectories with the profiling code of each team member.
+
+The ana_code directory contains project.sql which contains commands to create the two tables for our data.
