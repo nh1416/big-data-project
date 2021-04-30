@@ -26,7 +26,8 @@ SELECT * FROM water_quality LIMIT 10;
 --Query to show all of the relevant data in both sets together
 SELECT air_quality.startdate, avg(air_quality.datavalue), avg(water_quality.residualfreechlorine), avg(water_quality.turbidity), avg(water_quality.fluoride) 
 FROM air_quality 
-FULL JOIN water_quality 
+FULL OUTER JOIN water_quality 
 ON air_quality.startdate = water_quality.sampledate 
+WHERE air_quality.measure = "Mean"
 GROUP BY air_quality.startdate
 ORDER BY SUBSTR(air_quality.startdate, 4), SUBSTR(air_quality.startdate, 0, 2);
