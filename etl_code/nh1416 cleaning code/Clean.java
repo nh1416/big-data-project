@@ -1,34 +1,27 @@
-import java.io.IOException;
-import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
-import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
-
-public class Clean{
-public void main(String[] args) throws Exception {
-
-		Configuration conf = new Configuration();
-		Job job = Job.getInstance(conf, "Cleaner");
-
-		job.setJarByClass(Clean.class);
-		job.setMapperClass(CleanMapper.class);
-		job.setCombinerClass(CleanReducer.class);
-		job.setReducerClass(CleanReducer.class);
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class); 
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
-		System.exit(job.waitForCompletion(true) ? 0 : 1);
+public class Clean {
+	public static void main(String[] args) throws Exception {
+		 if (args.length != 2) {
+			 System.err.println("Usage: Clean <input path> <output path>");
+			 System.exit(-1);
+		 }
+		 Job job = new Job();
+		 
+		 job.setJarByClass(Clean.class);
+		 job.setJobName("Clean");
+		 FileInputFormat.addInputPath(job, new Path(args[0]));
+		 FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		 
+		 job.setMapperClass(CleanMapper.class);
+		 //job.setReducerClass(CleanReducer.class);
+		 job.setNumReduceTasks(0);
+		 job.setOutputKeyClass(Text.class);
+		 job.setOutputValueClass(Text.class);
+		 System.exit(job.waitForCompletion(true) ? 0 : 1);
 	}
 }
