@@ -14,7 +14,7 @@ import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 
-public static class CleanReducer
+public class CleanReducer
 	extends Reducer<Text,IntWritable,Text,IntWritable> {
 
 		private IntWritable result = new IntWritable();

@@ -13,8 +13,8 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class clean
-public static void main(String[] args) throws Exception {
+public class Clean{
+public void main(String[] args) throws Exception {
 
 		Configuration conf = new Configuration();
 		Job job = Job.getInstance(conf, "Cleaner");
@@ -31,5 +31,4 @@ public static void main(String[] args) throws Exception {
 		job.setOutputFormatClass(TextOutputFormat.class);
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 	}
-
 }
